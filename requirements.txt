@@ -1,0 +1,9 @@
+git+https://github.com/pierre-24/pytimefliplib.git
+bleak
+requests
+ctypes
+tkinter
+asyncio
+threading
+json
+base64

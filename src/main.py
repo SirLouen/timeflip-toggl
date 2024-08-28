@@ -1,4 +1,4 @@
-# pyinstaller --onefile --noconsole --hidden-import winrt.windows.foundation.collections src/main.py
+# pyinstaller --onefile --noconsole --icon=assets/icon.ico --hidden-import winrt.windows.foundation.collections src/main.py
 
 from ctypes import windll
 from gui import create_main_window, start_gui_event_loop

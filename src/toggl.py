@@ -1,6 +1,6 @@
 import base64
 import requests
-from config import TOGGL_API_TOKEN, TOGGL_WORKSPACE_ID, TOGGL_PROJECT_ID
+from config import TOGGL_API_TOKEN, TOGGL_WORKSPACE_ID
 
 TOGGL_API_URL = "https://api.track.toggl.com/api/v9"
 

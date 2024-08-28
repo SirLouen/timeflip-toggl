@@ -64,7 +64,7 @@ def save_facet_values_on_click(facet_entries, saved_facet_values, project_select
         project_id = next((id for id, name in TOGGL_PROJECT_IDS.items() if name == project_name), None)
         saved_facet_values[f'{facet}_project_id'] = project_id
         
-    save_facet_values(saved_facet_values, project_selectors)
+    save_facet_values(saved_facet_values)
     messagebox.showinfo('Success', 'Facet values saved!')
 
 def start_gui_event_loop(root):
