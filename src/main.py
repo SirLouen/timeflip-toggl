@@ -15,10 +15,10 @@ def main():
     except Exception as e:
         print(f"Failed to set App User Model ID: {e}")
     
-    root, facet_entries, gui_logger, saved_facet_values = create_main_window()
+    root, facet_entries, gui_logger, saved_facet_values, project_selectors = create_main_window()
     
     # Load facet values from file
-    load_facet_values(facet_entries, saved_facet_values)
+    load_facet_values(facet_entries, saved_facet_values, project_selectors)
     
     # Start the system tray icon in a separate thread
     run_tray_icon(root)

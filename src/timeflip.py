@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 async def timeflip_main(saved_facet_values, gui_logger):
     last_facet = None
     detect_facet_count = 0
-     # Log the saved facet values for debugging
+    # Log the saved facet values for debugging
     gui_logger.debug(f"Saved facet values at start: {saved_facet_values}")
 
     try:
@@ -20,8 +20,13 @@ async def timeflip_main(saved_facet_values, gui_logger):
                 current_facet = await client.current_facet()
 
                 # Ensure current_facet is in saved_facet_values
-                if f"Facet {current_facet}" in saved_facet_values:
-                    log_message = f'Current facet: {current_facet} - {saved_facet_values[f"Facet {current_facet}"]}'
+                facet_key = f"Facet {current_facet}"
+                if facet_key in saved_facet_values:
+                    description = saved_facet_values[facet_key]
+                    project_id_key = f"{facet_key}_project_id"
+                    project_id = saved_facet_values.get(project_id_key)
+
+                    log_message = f'Current facet: {current_facet} - {description} - {project_id}'
                     gui_logger.debug(log_message)
 
                     if last_facet is None:
@@ -34,9 +39,8 @@ async def timeflip_main(saved_facet_values, gui_logger):
                         detect_facet_count = 1
 
                     if detect_facet_count == 5:
-                        description = saved_facet_values[f"Facet {last_facet}"]
                         start_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-                        send_tasks_to_toggl(description, start_time, gui_logger)
+                        send_tasks_to_toggl(description, start_time, gui_logger, project_id)
                         detect_facet_count = 0
                 else:
                     gui_logger.warning(f"Facet {current_facet} not found in saved facet values.")

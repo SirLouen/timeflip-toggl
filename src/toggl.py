@@ -42,7 +42,7 @@ def stop_current_task(facet_description, gui_logger):
     else:
         gui_logger.debug("No current running task to stop.")
 
-def send_tasks_to_toggl(description, start_time, gui_logger):
+def send_tasks_to_toggl(description, start_time, gui_logger, project_id):
     continues = False
     
     # Stop any current running task before starting a new one
@@ -58,7 +58,7 @@ def send_tasks_to_toggl(description, start_time, gui_logger):
             "start": start_time,
             "duration": -1,
             "workspace_id": TOGGL_WORKSPACE_ID,
-            "project_id": TOGGL_PROJECT_ID,
+            "project_id": project_id,
             "created_with": "TimeFlip Toggl Bridge",
         }
         
