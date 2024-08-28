@@ -1,9 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
-from logger import setup_gui_logger
+from logger import Logger
 from utils import save_facet_values 
 
 def create_main_window():
+    
+    saved_facet_values = {}
     root = tk.Tk()
     root.title("Timeflip Logger")
     
@@ -24,10 +26,11 @@ def create_main_window():
         
         entry = tk.Entry(facet_frame)
         entry.grid(row=i-1, column=1, padx=5, pady=5)
+        
         facet_entries[f'Facet {i}'] = entry
         
     # Create SAVE button
-    save_button = tk.Button(root, text='SAVE', command=lambda: save_facet_values_on_click(facet_entries))
+    save_button = tk.Button(root, text='SAVE', command=lambda: save_facet_values_on_click(facet_entries, saved_facet_values))
     save_button.pack(pady=5)
 
     # Create a text widget to display logs
@@ -35,15 +38,18 @@ def create_main_window():
     log_text.pack()
 
     # Set up logger
-    setup_gui_logger(log_text)
+    logger = Logger(log_text)
+    gui_logger = logger.logger
 
     # Modify close event to hide the window instead of closing the app
     root.protocol("WM_DELETE_WINDOW", lambda: root.withdraw())
 
-    return root, facet_entries, log_text
+    return root, facet_entries, gui_logger, saved_facet_values
 
-def save_facet_values_on_click(facet_entries):
-    save_facet_values(facet_entries)
+def save_facet_values_on_click(facet_entries, saved_facet_values):
+    for facet, entry in facet_entries.items():
+        saved_facet_values[facet] = entry.get()
+    save_facet_values(saved_facet_values)
     messagebox.showinfo('Success', 'Facet values saved!')
 
 def start_gui_event_loop(root):

@@ -15,16 +15,16 @@ def main():
     except Exception as e:
         print(f"Failed to set App User Model ID: {e}")
     
-    root, facet_entries, log_text = create_main_window()
+    root, facet_entries, gui_logger, saved_facet_values = create_main_window()
     
     # Load facet values from file
-    load_facet_values(facet_entries)
+    load_facet_values(facet_entries, saved_facet_values)
     
     # Start the system tray icon in a separate thread
     run_tray_icon(root)
     
     # Start the TimeFlip thread
-    start_timeflip_thread(facet_entries, log_text)
+    start_timeflip_thread(saved_facet_values, gui_logger)
     
     # Start the GUI event loop
     start_gui_event_loop(root)

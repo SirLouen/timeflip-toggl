@@ -1,7 +1,6 @@
 import base64
 import requests
 from config import TOGGL_API_TOKEN, TOGGL_WORKSPACE_ID, TOGGL_PROJECT_ID
-from logger import gui_logger
 
 TOGGL_API_URL = "https://api.track.toggl.com/api/v9"
 
@@ -14,7 +13,7 @@ def get_headers():
     }
     return headers
 
-def stop_current_task(facet_description):
+def stop_current_task(facet_description, gui_logger):
     headers = get_headers()
     gui_logger.debug("Stopping current task...")
     
@@ -41,13 +40,18 @@ def stop_current_task(facet_description):
             gui_logger.debug("Current Toggl task matches the facet task. No need to stop.")
             return True
     else:
-        gui_logger.info("No current running task to stop.")
+        gui_logger.debug("No current running task to stop.")
 
-def send_tasks_to_toggl(description, start_time):
+def send_tasks_to_toggl(description, start_time, gui_logger):
     continues = False
+    
     # Stop any current running task before starting a new one
-    continues = stop_current_task(description)
-    if not continues:
+    continues = stop_current_task(description, gui_logger)
+    # Check if the description is "STOP" to avoid starting a new task
+    if description == "STOP":
+        gui_logger.debug("STOP: Not starting any new task.")
+        return
+    elif not continues:
         headers = get_headers()
         task_data = {
             "description": description,
