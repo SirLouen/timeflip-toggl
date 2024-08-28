@@ -1,0 +1,8 @@
+services:
+  timeflip-toggl:
+    container_name: timeflip-toggl
+    build: 
+      context: $PWD/src
+    restart: unless-stopped
+    volumes:
+      - $PWD/data:/usr/src/app/data

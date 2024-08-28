@@ -1,0 +1,8 @@
+__pycache__/
+build/
+dist/
+review/
+main.spec
+*.old
+config.py
+data/facet_values.json
