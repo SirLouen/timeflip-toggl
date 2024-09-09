@@ -12,7 +12,7 @@ This project is a desktop application that integrates with the TimeFlip device a
 ## Requirements
 
 - Python 3.x
-- Required Python packages: `ctypes`, `tkinter`, `requests`, `bleak`, `pytimefliplib`, `asyncio`, `threading`, `json`, `base64`
+- Required Python packages: `ctypes`, `tkinter`, `requests`, `bleak`, `pytimefliplib`, `asyncio`, `threading`, `json`, `base64`, `socket`
 - TimeFlip device
 - Toggl account and [API token](https://track.toggl.com/profile#api-token)
 
@@ -42,6 +42,7 @@ TOGGL_PROJECT_IDS = {
     2: 'Project Two',
     3: 'Project Three'
 }
+LISTEN_PORT = 12345
 ```
 
 Also create a `data` folder to store the facet values in a `facet_values.json` file.

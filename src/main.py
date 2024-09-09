@@ -1,3 +1,4 @@
+# For Bluetooth to work, is important to load winrt.windows.foundation.collections in the main.py file.
 # pyinstaller --onefile --noconsole --icon=assets/icon.ico --hidden-import winrt.windows.foundation.collections src/main.py
 
 from ctypes import windll
