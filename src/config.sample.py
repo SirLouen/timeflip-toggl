@@ -11,3 +11,6 @@ TOGGL_PROJECT_IDS = {
     123456789: 'SampleProject',
     987654321: 'GreatProject',
 }
+
+# Server configuration
+LISTEN_PORT = 34765
